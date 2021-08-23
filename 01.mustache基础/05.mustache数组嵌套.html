@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <div id="container"></div>
+  <script src="jslib/mustache.js"></script>
+  <script>
+    const templateStr = `
+      <ul>
+        {{#arr}}
+        <li>
+          {{name}}的爱好是:
+          <ol>
+            {{#food}}  
+              <li>{{.}}</li>
+            {{/food}}
+          </ol>
+        </li>
+        {{/arr}}
+      </ul>
+    `
+    const data = {
+      arr:[
+        { 'name': '小米','food': ['冰淇淋','可丽饼'] },
+        { 'name': '中米','food': ['奶油糖','樱桃圈'] },
+        { 'name': '小米','food': ['西梅干','蘑菇力'] },
+      ]
+    }
+    const domStr = Mustache.render(templateStr,data)
+    const container = document.getElementById('container')
+    container.innerHTML = domStr
+
+  </script>
+</body>
+</html>

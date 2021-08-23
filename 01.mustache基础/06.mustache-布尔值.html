@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <div id="container"></div>
+  <script src="jslib/mustache.js"></script>
+
+  <!-- 利用text/template简化书写 -->
+  <script type="text/template" id="mytemplate">
+    {{#m}}
+      <h1>hello</h1>
+    {{/m}}
+  </script>
+  
+  <script>
+    var templateStr = document.getElementById('mytemplate').innerHTML
+    var data = {
+      m:true //相当于display:none的效果 元素彻底消失
+    }
+    var domStr = Mustache.render(templateStr,data)
+    var container = document.getElementById('container')
+    container.innerHTML = domStr
+  </script>
+</body>
+</html>
