@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <script src="../js/vue.js"></script>
+</head>
+<body>
+  <div id="root">
+    <p>{{name}}</p>
+    <hr>
+    <a v-bind:href="url">命令语法-点击去往百度</a>
+  </div>
+
+  <script type="text/javascript">
+    Vue.config.productionTip = false
+
+    new Vue({
+      el:'#root',
+
+      data:{
+        name:'插值语法',
+        url:'https://www.baidu.com/'
+      }
+    })
+  </script>
+</body>
+</html>
+<!-- 
+  Vue模板语法有两大类
+  1.插值语法:
+    用于解析标签体内容
+    语法:{{xxx}},xxx式js表达式,且可直接读取到data中的所有属性
+  2.指令语法:
+    用于解析标签(包括标签属性|标签体内容|绑定事件...)
+    如 v-bind:href='xxx' 简写为 :href='xxx',xxx同样要写js表达式 且可直接获取data中所有属性
+    备注:vue中有很多指令 且形式都是v-???
+ -->
