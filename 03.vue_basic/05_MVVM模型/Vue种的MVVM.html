@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MVVM理解</title>
+  <script src="../js/vue.js"></script>
+</head>
+<body>
+  <div id="root">
+    {{name}}　<br>
+    <!-- 除了data里的数据 Vue实例上的属性都能显示 -->
+    {{$emit}} <br>
+    {{_c}} <br>
+  </div>
+
+  <script type="text/javascript">
+    Vue.config.productionTip = false
+    
+    const vm = new Vue({
+      el:'#root',
+      data(){
+        return{
+          name:'米糊米糊'
+        }
+      }
+    })
+    console.log(vm)
+  </script>
+</body>
+</html>
+<!-- 
+  MVVM模型：
+  1.Ｍ:model,代码中data里的数据
+  2.Ｖ:view,视图 模板中的html代码 页面中的DOM元素
+  3.ＶＭ：view　即Vue实例
+
+  注：
+  １.data中出现的所有属性　最后都出现在vm上
+  ２.vm身上所有属性和Vue原型上所有属性　在vue模板中都可以使用
+ -->
