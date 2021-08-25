@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>回顾Object.defineProperty</title>
+  <script src="../js/vue.js"></script>
+</head>
+<body>
+  <script type="text/javascript">
+    Vue.config.productionTip = false
+    let number = 24
+    let person = {
+      name:'Lili',
+      gender:'female',
+      // age:18
+    }
+    Object.defineProperty(person,'age',{
+      /* value:18,
+      enumerable:true, //控制属性是否可以枚举
+      configurable:true,//控制属性是否可以删除
+      writable:true,  *///控制属性是否可以改写
+      
+      get(){
+        console.log('有人读取了age属性')
+        return 20
+      },
+      set(value){
+        console.log('有人改写了age属性', value) //必须是value 这是Object.defineProperty中第三个参数的内容
+      }
+    })
+    console.log(Object.keys(person)) //用Object.defineProperty添加的对象不可枚举、改写、删除，改变对应属性的默认值即可
+  </script>
+</body>
+</html>
