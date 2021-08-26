@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>事件的修饰符</title>
+  <script src="../js/vue.js"></script>
+</head>
+<body>
+  <!-- Vue中的事件修饰符
+    1.prevent:阻止默认事件（常用）
+    2.stop:阻止事件冒泡（常用）
+    3.once:事件只触发一次（常用）
+    4.capture:使用事件的捕获模式
+    5.self:只有event.target是当前操作的元素时才触发事件
+    6.passive:事件的默认行为立即执行，无需等待事件回调执行完毕（移动端项目用的多 ）
+   -->
+  <div id="root">
+    <a href="https://juejin.cn/" @click.prevent="go">去掘金网站</a>
+  </div>
+  <script type="text/javascript">
+    new Vue({
+      el:'#root',
+      data:{
+
+      },
+      methods:{
+        go(e){
+          // e.preventDefault()//阻止方法一,方法二是事件修饰符@click.prevent
+          alert('去掘金了')
+        }
+      }
+    })
+  </script>
+</body>
+</html>
