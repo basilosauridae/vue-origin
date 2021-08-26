@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>事件的基本使用</title>
+  <script src="../js/vue.js"></script>
+</head>
+<bod>
+  <div id="root">
+    <button v-on:click="hanldeInfo">点击出现提示信息</button>
+    <button @click="hanldeInfo2(66,$event)">点击出现提示信息2</button>
+  </div>
+  <script type="text/javascript">
+    Vue.config.productionTip = false
+    const vm = new Vue({
+      el:'#root',
+      data(){
+        return{}
+      },
+      methods:{
+        hanldeInfo(e){
+          alert('哈哈傻冒')
+          console.log(e)
+          console.log(e.target.innerText)
+          console.log(this === vm) //this就是指Vue实例 但如果是个箭头函数 this指向window
+        },
+        // 函数需要传参时加括号 第一个默认参数是event 如需传其他参数 用$event占位解析：
+        hanldeInfo2(num,e){
+          console.log(num)
+          console.log(e)
+        }
+      }
+    })
+  </script>
+</bod>
+</html>
+<!-- 
+  事件的基本使用：
+  1.使用v-on:xxx简写为@xxx,其中xxx是事件名
+  2.事件的回调需要配置在methods函数中，最终会在vm上
+  3.methods中配置的函数不用用箭头函数，不然会指向windows
+  4.methods中配置的函数，都是被Vue所管理的函数，this的指向是vm或者组件实例对象
+  5.@click="demo"和@click="demo($event)"效果一致 都能得到e 但后者可以传参
+-->
