@@ -6,6 +6,15 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>事件的修饰符</title>
   <script src="../js/vue.js"></script>
+  <style>
+    *{
+      margin-top: 10px;
+    }
+    .box{
+      background-color: plum;
+      height: 100px;
+    }
+  </style>
 </head>
 <body>
   <!-- Vue中的事件修饰符
@@ -17,7 +26,17 @@
     6.passive:事件的默认行为立即执行，无需等待事件回调执行完毕（移动端项目用的多 ）
    -->
   <div id="root">
+    <!-- 阻止默认事件 -->
     <a href="https://juejin.cn/" @click.prevent="go">去掘金网站</a>
+
+    <!-- 阻止默认事件和事件冒泡(修饰符可以连续写) -->
+    <div class="box" @click="go">
+      <a href="https://juejin.cn/" @click.prevent.stop="go">点我去掘金</a>
+    </div>
+
+    <!-- 事件只触发一次（常用） -->
+    <button @click.once="go">点我提示信息</button>
+
   </div>
   <script type="text/javascript">
     new Vue({

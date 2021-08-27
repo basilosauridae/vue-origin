@@ -10,6 +10,7 @@
 <body>
   <div id="root">
     <input type="text" @keyup.enter="showInfo">
+    <input type="text" @keyup.ctrl.y="showInfo"><!--同时按下ctr+y触发-->
   </div>
   <script type="text/javascript">
     Vue.config.productionTip = false
@@ -40,9 +41,9 @@
     左 => left
     右 => right
   2.Vue未提供别名的按键，可以使用按键原始的key值去绑定，但注意要转为kebab-case(短横线命名)如大小写切换CapsLock要写成caps-lock
-  3.系统修饰键（用法特殊）：ctrl、alt、shift、meta
+  3.系统修饰键（用法特殊）：ctrl、alt、shift、meta(win)
     (1)配合keyup使用：按下修饰键的同时，再按下其他键，随后释放其他键，事件才被触发
     (2)配合keydown使用：正常触发事件
   4.也可以使用keyCode去指定具体的按键（不推荐）
-  5.Vue.config.keyCodes.自定义键名 = 键码，可以去定制按键别名
+  5.Vue.config.keyCodes.自定义键名 = 键码，可以去定制按键别名（不推荐）
  -->
