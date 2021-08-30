@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>姓名案例-计算属性</title>
+  <script src="../js/vue.js"></script>
+</head>
+
+<body>
+  <div id="root">
+    姓：<input type="text" v-model="surname"> <br>
+    名：<input type="text" v-model="name"> <br>
+    全名：{{fullName}} <br>
+    全名：{{fullName}} <br>
+    全名：{{fullName}} <br>
+    全名：{{fullName}} <br>
+    全名：{{fullName}} <br>
+    全名：{{fullName}} <br>
+    全名：{{fullName}} <br>
+  </div>
+
+  <script type="text/javascript">
+    Vue.config.productionTip = false
+    const vm = new Vue({
+      el: '#root',
+      data() {
+        return {
+          surname: '',
+          name: '',
+        }
+      },
+      computed:{
+        fullName:{
+          get(){
+            console.log('被调用了') //函数的写法会调用多次，第三章的计算属性有缓存支持 减少调用
+            return this.surname + '-' + this.name
+          },
+          set(value){
+            const arr = value.split('-')
+            this.surname = arr[0]
+            this.name = arr[1]
+          }
+        }
+      }  
+    })
+  </script>
+</body>
+
+</html>
+<!-- 
+  1.属性（property）：data中的数据或methods中的函数
+  2.计算属性：
+    01_定义：计算属性本身是不存在的，它是通过【已有的属性】计算而来
+        【已有属性】指vm身上的 不是全局随便一个变量就行的
+    02_原理：底层借助了Object.defineProperty方法提供的getter和setter函数
+    03_getter和setter:
+      get什么时候调用：（1）初次读取计算属性时 （2）所依赖的数据发生变化时
+      set什么时候调用：属性被修改时
+    04_优势：与methods相比，内部有缓存机制,可复用，效率更高，调试方便
+    05_注意：
+       计算属性最终会出现在vm上，直接读取使用即可
+       若计算属性要被修改，必须用set函数去响应修改，且set中要引起计算时依赖的数据发生改变
+-->

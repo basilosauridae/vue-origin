@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>姓名案例-methods实现</title>
+  <script src="../js/vue.js"></script>
+</head>
+
+<body>
+  <div id="root">
+    姓：<input type="text" v-model="surname"> <br>
+    名：<input type="text" v-model="name"> <br>
+    <button @click="fullName">aa</button>
+    全名: <span>{{fullName()}}</span> <br>
+    全名: <span>{{fullName()}}</span> <br>
+    全名: <span>{{fullName()}}</span> <br>
+    全名: <span>{{fullName()}}</span> <br>
+    全名: <span>{{fullName()}}</span> <br>
+    全名: <span>{{fullName()}}</span> <br>
+    全名: <span>{{fullName()}}</span> <br>
+    全名: <span>{{fullName()}}</span> <br>
+    全名: <span>{{fullName()}}</span> <br>
+    <!-- 函数加括号表示调用了此函数 返回函数执行的结果 -->
+  </div>
+
+  <script type="text/javascript">
+    Vue.config.productionTip = false
+
+    new Vue({
+      el: '#root',
+      data:{
+        surname: '',
+        name: ''
+      },
+      methods:{
+        fullName(){ 
+          console.log('被调用了') //函数的写法会调用多次，第三章的计算属性有缓存支持 减少调用
+          return this.surname + '-' + this.name
+        }
+      }
+    })
+  </script>
+</body>
+
+</html>
