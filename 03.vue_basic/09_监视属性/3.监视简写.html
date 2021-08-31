@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>监视简写</title>
+  <script src="../js/vue.js"></script>
+</head>
+<body>
+  <div id="root">
+    <p>天气很{{is_hot?'炎热':'凉爽'}}</p>
+    <button @click="change">切换天气</button>
+  </div>
+  <script type="text/javascript">
+    Vue.config.productionTip = false
+    const vm = new Vue({
+      el:'#root',
+      data(){
+        return{
+          is_hot:false
+        }
+      },
+      methods: {
+        change(){
+          this.is_hot = !this.is_hot
+        }
+      },
+      watch:{
+        /* is_hot:{
+          handler(newValue, oldValue){
+            console.log('监听简写', newValue, oldValue)
+          }
+        }, */
+        // watch的简写前提是不更改immediate和deep属性
+        is_hot(newValue,oldValue){
+          console.log('监听简写',newValue,oldValue)
+        }
+      },
+    })
+    // 简写的第二种写法
+    /* vm.$watch('is_hot',function (newValue, oldValue) {
+       console.log('监听简写', newValue, oldValue)
+    }) */
+  </script>
+</body>
+</html>

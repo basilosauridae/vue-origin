@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>姓名案例-计算属性</title>
+  <script src="../js/vue.js"></script>
+</head>
+
+<body>
+  <div id="root">
+    姓：<input type="text" v-model="surname"> <br>
+    名：<input type="text" v-model="name"> <br>
+    全名：{{fullName}}
+  </div>
+
+  <script type="text/javascript">
+    Vue.config.productionTip = false
+    const vm = new Vue({
+      el: '#root',
+      data() {
+        return {
+          surname: '',
+          name: '',
+          fullName:''
+        }
+      },
+      // 计算属性实现全名功能
+      /* computed: {
+        fullName(){
+          return this.surname + '-' + this.name
+        }
+      } */
+
+      // 监听属性实现全名功能
+      watch:{
+        surname(val){
+          setTimeout(()=>{
+            this.fullName = val + this.name
+          },1000)
+        },
+        name(val){
+          this.fullName = this.surname + '-' + val
+        }
+      }
+    })
+  </script>
+</body>
+
+</html>
+<!-- 
+  computed和watch之间的区别：
+  1.computed能完成的功能，watch都可以完成
+  2.watch能完成的功能，watch不一定能完成。如watch内能异步操作
+
+  两个重要的原则：为了让this都指向vm或者组件的实例对象
+  1.所有被vue管理的函数，最好写成普通函数
+  2.所有不被vue管理的函数（如定时器的回调函数、ajax的回调函数、promise的回调函数等），最好写成箭头函数
+    
+ -->

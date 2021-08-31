@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>姓名案例-计算属性</title>
+  <script src="../js/vue.js"></script>
+</head>
+
+<body>
+  <div id="root">
+    姓：<input type="text" v-model="surname"> <br>
+    名：<input type="text" v-model="name"> <br>
+    全名：{{fullName}} <br>
+    <!-- 计算属性的使用直接写名字 fullName()调用是错的 -->
+  </div>
+
+  <script type="text/javascript">
+    Vue.config.productionTip = false
+    const vm = new Vue({
+      el: '#root',
+      data() {
+        return {
+          surname: '',
+          name: '',
+        }
+      },
+      computed:{
+        // 计算属性简写条件：属性只用于读取 不用于修改 是简写的前提条件
+        /* fullName:{
+          get(){
+            console.log('被调用了') 
+            return this.surname + '-' + this.name
+          }
+        } */
+        fullName(){
+          console.log('被调用了')
+            return this.surname + '-' + this.name
+        }
+      }  
+    })
+  </script>
+</body>
+
+</html>

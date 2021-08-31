@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>天气案例</title>
+  <script src="../js/vue.js"></script>
+</head>
+<body>
+  <div id="root">
+    <!-- 计算属性若页面中没有被使用 谷歌vue插件是不显示变化的 -->
+    <h3>今天天气很</h3>
+    <!-- <h3>今天天气很{{info}}</h3> -->
+    <button @click="changeWeather">切换天气</button>
+  </div>
+
+  <script type="text/javascript">
+    Vue.config.productionTip = false
+
+    const vm = new Vue({
+      el:'#root',
+      data(){
+        return{
+          is_hot:false
+        }
+      },
+      computed:{
+        info(){
+          return this.is_hot?'炎热':'凉爽'
+        }
+      },
+      methods: {
+        changeWeather(){
+          this.is_hot = !this.is_hot
+        }
+      },
+      watch:{
+       /*  is_hot:{
+          immediate:true,//属性immediate，初始化时让handler调用一下 默认值是false
+          handler(newValue, oldValue) {
+            console.log('is_hot被修改了', newValue, oldValue)
+          }
+        }, */
+        // 正常的键名要加"",info是简写
+        info:{
+          handler(newValue,oldValue){
+            console.log( 'info计算属性也能被监视',newValue,oldValue );
+          }
+        }
+      },
+    })
+    // 监听的第二种写法 用vm身上的api:
+    vm.$watch('is_hot',{
+      immediate: true,//属性immediate，初始化时让handler调用一下 默认值是false
+      handler(newValue, oldValue) {
+        console.log('监听的第二种写法', newValue, oldValue)
+      }
+    })
+  </script>
+</body>
+</html>
+<!-- 
+  监视属性watcher:
+  1.当被监视的属性发生变化时，回调函数handler自动调用
+  2.监视的属性必须存在才能调用（被监视的属性有data中的基础属性，也有计算属性）
+  3.监视的两种方法：
+    new Vue时传入watch的配置
+    通过vm.$watch监视，被监视的属性名要加双引号
+ -->
