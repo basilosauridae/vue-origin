@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>条件渲染</title>
+  <script src="../js/vue.js"></script>
+</head>
+<body>
+  <div id="root">
+    <h2>当前的值是{{n}}</h2>
+    <button @click="n++">点我+1</button>
+    <!-- 用v-show做条件渲染 -->
+    <!-- <p v-show="true">欢迎来到{{name}}</p>
+    <p v-show="false">欢迎来到{{name}}</p> -->
+
+    <!-- 用v-if做条件渲染 -->
+    <!-- <p v-if="true">欢迎来到{{name}}</p>
+    <p v-if="false">欢迎来到{{name}}</p> -->
+
+    <div v-show="n===1">👵</div>
+    <div v-show="n===2">🧓</div>
+    <div v-show="n===3">👳‍♀️</div>
+  </div>
+  <script type="text/javascript">
+    Vue.config.productionTip = false
+
+    new Vue({
+      el:'#root',
+      data(){
+        return{
+          n:1,
+          name:'王者荣耀'
+        }
+      }
+    })
+  </script>
+</body>
+</html>
