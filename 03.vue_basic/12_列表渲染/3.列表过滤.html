@@ -63,6 +63,7 @@
           ]
         },
         computed:{
+          // 注意这里要写两个return
           filpersons(){
             return this.persons.filter(item => {
               return item.name.indexOf(this.keyword) !== -1

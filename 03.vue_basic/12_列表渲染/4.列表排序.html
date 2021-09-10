@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>列表排序</title>
+  <script src="../js/vue.js"></script>
+</head>
+<body>
+  <div id="root">
+    <h2>人员列表</h2>
+    <input type="text" placeholder="请输入名字" v-model="keyword">
+    <button @click="type = 2">年龄升序</button>
+    <button @click="type = 1">年龄降序</button>
+    <button @click="type = 0">原顺序</button>
+    <ul>
+      <li v-for="(item,index) in filPersons" :key="index">
+        {{item.name}}-{{item.age}}-{{item.age}}
+      </li>
+    </ul>
+  </div>
+  
+  <script type="text/javascript">
+    Vue.config.productionTip = false
+    new Vue({
+      el:'#root',
+      data:{
+        keyword:'',
+        type:0,
+        persons: [
+          { id: '001', name: '马冬梅', age: 18, sex: 'female' },
+          { id: '002', name: '周冬雨', age: 19, sex: 'female' },
+          { id: '003', name: '周杰伦', age: 29, sex: 'male' },
+          { id: '004', name: '温兆伦', age: 49, sex: 'male' }
+        ]
+      },
+      computed:{
+        filPersons(){
+          const arr = this.persons.filter(p=>{
+            return p.name.indexOf(this.keyword) !== -1
+          })
+          // Boolean()中参数为0是false 其他数字是true
+          if(this.type){
+            arr.sort((a,b)=>{
+              return this.type===1 ? b.age - a.age : a.age - b.age
+            })
+          }
+          return arr
+        }
+      }
+    })
+  </script>
+</body>
+</html>
+<!-- sort方法回顾 
+  sort() 方法用于对数组的元素进行排序。
+  let arr = [1,2,5,0,9,8]
+  arr.sort((a,b)=>{
+    return a-b
+  })
+  console.log(arr,'a-b') //升序， [0, 1, 2, 5, 8, 9]
+
+  arr.sort((a,b)=>{
+    return b-a
+  })
+  console.log(arr,'b-a') //降序， [9, 8, 5, 2, 1, 0]
+-->
