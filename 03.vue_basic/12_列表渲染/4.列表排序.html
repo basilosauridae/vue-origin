@@ -15,8 +15,10 @@
     <button @click="type = 1">年龄降序</button>
     <button @click="type = 0">原顺序</button>
     <ul>
-      <li v-for="(item,index) in filPersons" :key="index">
+      <!-- 若写成:key="index" 当破坏了数据顺序时 节点复用率低 每行若有输入框 也会乱掉 -->
+      <li v-for="(item,index) in filPersons" :key="item.id">
         {{item.name}}-{{item.age}}-{{item.age}}
+        <input type="text">
       </li>
     </ul>
   </div>

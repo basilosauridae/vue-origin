@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>更新时的一个问题</title>
+  <script src="../js/vue.js"></script>
+</head>
+
+<body>
+  <div id="root">
+    <h2>人员列表</h2>
+    <button @click="updateMa">点击修改麻豆的信息</button>
+    <ul>
+      <li v-for="(item,index) in persons" :key="item.id">
+        {{item.name}}-{{item.age}}-{{item.age}}
+      </li>
+    </ul>
+  </div>
+
+  <script type="text/javascript">
+    Vue.config.productionTip = false
+    const vm = new Vue({
+      el: '#root',
+      data: {
+        keyword: '',
+        type: 0,
+        persons: [
+          { id: '001', name: '麻豆', age: 18, sex: 'female' },
+          { id: '002', name: '冬瓜', age: 19, sex: 'female' },
+          { id: '003', name: '葫芦籽', age: 29, sex: 'male' },
+          { id: '004', name: '太阳花', age: 49, sex: 'male' }
+        ]
+      },
+      methods: {
+        updateMa(){
+          this.persons[0] = { id: '001', name: '蚕豆', age: 8, sex: 'male' }
+        }
+        /* 麻豆的信息是一个对象 vue并不能监测到对象的变化 所以vue开发者工具和页面都没有变化
+           但内存中的代码已经改变了 可以在控制台打印vm观察一下
+        */
+      },
+    })
+  </script>
+</body>
+
+</html>
