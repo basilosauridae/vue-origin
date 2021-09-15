@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Vue.set的使用</title>
+  <script src="../js/vue.js"></script>
+</head>
+<body>
+  <div id="root">
+    <p>名称：{{name}}</p>
+    <p>地址：{{address}}</p>
+    <hr>
+    <p>姓名：{{student.name}}</p>
+    <p>年龄：实岁：{{student.age.rAge}}，虚岁：{{student.age.sAge}}</p>
+    <ul>
+      <li v-for="(item,index) in student.friends" :key="index">
+        {{item.name}} - {{item.age}}
+        <!-- {{item.sex}} 相当于{{undefined}} 这样写是不报错的 但在data中直接声明的如address没有会报错 -->
+      </li>
+    </ul>
+  </div>
+  <script type="text/javascript">
+    Vue.config.productionTip = false
+
+    const vm = new Vue({
+      el:"#root",
+      data:{
+        name:'wondertek',
+        address:'coffe',
+        student: {
+          name: 'Tom',
+          age: {
+            rAge:29,
+            sAge:19
+          },
+          friends: [
+            { name: 'jerry', age: 19 },
+            { name: 'marry', age: 18 },
+            { name: 'jenny', age: 20 }
+
+          ]
+        }
+      }
+    })
+    // 需求 在student上新增一个属性sex 且是响应式的
+    /* 
+    控制台中比较vm._data.sex='val'和Vue.set(vm,student.'sex','val')后vm的值
+    发现前者不存在sex的get和set，后者有get和set
+    */
+  </script>
+</body>
+</html>
