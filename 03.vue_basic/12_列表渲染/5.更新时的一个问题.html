@@ -36,7 +36,8 @@
       },
       methods: {
         updateMa(){
-          this.persons[0] = { id: '001', name: '蚕豆', age: 8, sex: 'male' }
+          this.persons[0] = { id: '001', name: '蚕豆', age: 8, sex: 'male' } //直接对数组赋值页面不奏效
+          this.persons.splice(0,1,{ id: '001', name: '豌豆公主', age: 8, sex: 'male' }) //只有通过数组的方法
         }
         /* 麻豆的信息是一个对象 vue并不能监测到对象的变化 所以vue开发者工具和页面都没有变化
            但内存中的代码已经改变了 可以在控制台打印vm观察一下

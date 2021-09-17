@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>vue检测数据改变的原理_数组</title>
+  <script src="../js/vue.js"></script>
+</head>
+<body>
+  <div id="root">
+    <h3>职员信息</h3>
+    <button @click="addSex" class="pink">点击添加职员爱好</button>
+    <p>姓名：{{student.name}}</p>
+    <p>年龄：实岁：{{student.age.rAge}}，虚岁：{{student.age.sAge}}</p>
+    <p>职员爱好：</p>
+    <ul>
+      <li v-for="(h,index) in student.hobby" :key="index">
+        {{h}}
+      </li>
+    </ul>
+  </div>
+  <script type="text/javascript">
+    Vue.config.productionTip = false
+
+    const vm = new Vue({
+      el:"#root",
+      data:{
+        name:'wondertek',
+        student: {
+          name: 'Tom',
+          age: {
+            rAge:29,
+            sAge:19
+          },
+          hobby:['抽烟','喝酒','烫头'],
+        }
+      },
+      methods: {
+        addSex(){
+          // this.student.hobby[0] = '打台球'//不生效 看同级5.更新时的一个问题.html
+
+          // Vue.set(vm._data.student.hobby,1,'打台球') //方法一 使用set方法
+          this.student.hobby.splice(1,1,'打台球') //方法二 使用vue封装的数组方法
+        }
+      },
+    })
+  </script>
+  <style>
+    .pink{
+      background-color: pink;
+    }
+  </style>
+</body>
+</html>
+<!-- 
+  vm._data.student.hobby.push === Array.prototype.push 为false
+  Vue中调用的数组方法实际上不是原型对象上数组方法
+  Vue对数组的检测 是靠包装数组身上的常用修改数组的方法实现的  
+ -->

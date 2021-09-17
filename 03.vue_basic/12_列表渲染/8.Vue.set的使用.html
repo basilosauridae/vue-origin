@@ -9,10 +9,15 @@
 </head>
 <body>
   <div id="root">
+    <h3>公司信息</h3>
     <p>名称：{{name}}</p>
     <p>地址：{{address}}</p>
     <hr>
+
+    <h3>职员信息</h3>
+    <button @click="addSex" class="pink">点击添加职员性别</button>
     <p>姓名：{{student.name}}</p>
+    <p v-show="student.sex" class="pink">性别：{{student.sex}}</p>
     <p>年龄：实岁：{{student.age.rAge}}，虚岁：{{student.age.sAge}}</p>
     <ul>
       <li v-for="(item,index) in student.friends" :key="index">
@@ -39,16 +44,31 @@
             { name: 'jerry', age: 19 },
             { name: 'marry', age: 18 },
             { name: 'jenny', age: 20 }
-
           ]
         }
-      }
+      },
+      methods: {  
+        addSex(){
+          // Vue.set(this.student,'sex','man')
+          this.$set(this.student,'sex','man')
+        }
+      },
     })
     // 需求 在student上新增一个属性sex 且是响应式的
     /* 
-    控制台中比较vm._data.sex='val'和Vue.set(vm,student.'sex','val')后vm的值
+    控制台中比较vm._data.sex='val'和Vue.set(vm.student,'sex','val')后vm的值
     发现前者不存在sex的get和set，后者有get和set
+    
+    方法一：Vue.set(vm.student,'sex','val')
+    方法二：vm.$set(vm._data.student,'sex','val')
+
+    缺点：以上方法只能给data中的某一个对象追加属性  添加如address会报错
     */
   </script>
+  <style>
+    .pink{
+      background-color: pink;
+    }
+  </style>
 </body>
 </html>
