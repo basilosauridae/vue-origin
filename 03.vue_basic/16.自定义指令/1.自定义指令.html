@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>自定义指令</title>
+  <script src="../js/vue.min.js"></script>
+</head>
+<body>
+  <!-- 需求：
+    1.定义一个v-big,和v-text相似，但会把绑定的数值放大10倍
+    2.定义一个v-fbind,和v-bind相似，但可以让其所绑定的input元素默认获取焦点
+  -->
+  <div id="root">
+    <h3>当前的n值为：<span v-text="n"></span></h3>
+    <h3>放大10倍之后的n值为：<span v-big-number="n"></span></h3>'
+    <h3>放大5倍之后的n值为(全局指令)：<span v-big="n"></span></h3>
+    <button @click="n++">点击+1</button>
+    <hr>
+    <input type="text" v-fbind:value="n">
+  </div>
+
+  <script type="text/javascript">
+    Vue.config.productionTip = false
+    // 定义全局指令
+    Vue.directive('big',function(el, binding){
+      el.innerText = binding.value*5
+    })
+    new Vue({
+      el:'#root',
+      data:{
+        n:1
+      },
+      // 局部注册加s(directives) 全局没有s(directive)
+      directives:{
+        /* big函数何时会被调用？（即页面中的v-big指令生效）
+          1.指令与元素绑定成功时 2.指令所在模板被重新解析时
+          若指令中有-函数就不能简写 必须用''包裹
+        */
+        'big-number'(el,binding){
+          // console.log(el,el instanceof HTMLElement,'为true表示第一个参数a是真实DOM')
+          // console.log(binding)
+          el.innerText = binding.value*10
+        },
+        /*需求2刷新输入框即获取焦点，简写的函数形式无法判断赋值的时间，使用全写*/
+        // fbind(el,binding){
+        //   el.value = binding.value //这一步是为了和模板中数据n关联
+        //   el.focus() //为什么不生效，此时只在内存中生效了 详见2.html
+        // }
+        fbind:{
+          // 指令与元素成功绑定时调用的函数,成功绑定指在内存中不是页面上
+          bind(el,binding){
+            console.log('bind',this)//指令中的this指向window
+            el.value = binding.value
+          },
+          // 指令所在元素被插入页面时
+          inserted(el, binding){
+            console.log('inserted')
+            el.focus()
+          },
+          // 指令所在模板被重新解析时
+          update(el, binding) {
+            console.log('update')
+            el.value =  binding.value
+          },
+        }
+      }
+    })
+  </script>
+</body>
+</html>
+<!-- 
+  自定义指令总结：
+  一、定义语法：
+  （1）局部指令：new Vue({directives:{指令名，配置对象/回调函数}})
+  （2）全局指令：Vue.directive(指令名，配置对象/回调对象)
+  二、配置对象中常用的3个回调
+  （1）bind：指令与元素成功绑定时
+  （2）inserted：指令所在元素被插入页面时调用
+  （3）update：指令所在模板被解析时调用
+  三、备注
+  （1）指令定义时不加v-,使用时要加
+  （2）指令如果是多个单词，要使用kebab-case命名方式，不要用camelCase命名
+ -->
