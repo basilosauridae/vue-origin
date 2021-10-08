@@ -54,7 +54,7 @@
             console.log('bind',this)//指令中的this指向window
             el.value = binding.value
           },
-          // 指令所在元素被插入页面时
+          // 指令所在元素被插入页面时,解决关键
           inserted(el, binding){
             console.log('inserted')
             el.focus()

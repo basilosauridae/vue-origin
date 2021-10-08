@@ -23,7 +23,7 @@
 
     // 用监听属性实现
     //#region 
-    /* new Vue({
+    new Vue({
       el:'#root',
       data:{
         keyword:'',
@@ -39,7 +39,7 @@
       // indexOf('')的返回的是0 => bug输入框无值 不显示列表 => 解决immediate 立刻调用 让输入框没输入时就显示所有列表
       watch:{
         keyword:{
-          immediate:true,
+          immediate:true,//解决bug
           handler(val){
             this.filpersons = this.persons.filter(p => {
               return p.name.indexOf(val) !== -1
@@ -47,11 +47,11 @@
           }
         }
       }
-    }) */
+    })
     //#endregion
 
     // 用计算属性实现 依赖输入值计算而来
-    new Vue({
+    /* new Vue({
         el: '#root',
         data: {
           keyword: '',
@@ -70,7 +70,7 @@
             })
           }
         }
-      })
+      }) */
 
   </script>
 </body>

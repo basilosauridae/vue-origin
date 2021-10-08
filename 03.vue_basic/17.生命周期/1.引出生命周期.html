@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>引出生命周期</title>
+  <script src="../js/vue.min.js"></script>
+</head>
+<body>
+  <div id="root">
+    <h3 :style="{opacity}">爱你雷雷❤🧡💛💚💙💜🤎🖤🤍</h3>
+  </div>
+  <script type="text/javascript">
+    new Vue({
+      el:'#root',
+      data:{
+        opacity:1
+      },
+      // Vue完成模板解析并把初始的真实DOM元素放入页面后（挂载完毕）调用mounted
+      mounted() {
+        this.change()
+      },
+      methods: {
+        change(){
+          setInterval(() => {
+            this.opacity -= 0.01
+            if (this.opacity <= 0) this.opacity = 1
+          }, 16)
+        }
+      }
+    })
+  </script>
+</body>
+</html>

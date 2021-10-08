@@ -26,7 +26,7 @@
           console.log(e.target.innerText)
           console.log(this === vm) //this就是指Vue实例 但如果是个箭头函数 this指向window
         },
-        // 函数需要传参时加括号 第一个默认参数是event 如需传其他参数 用$event占位解析：
+        // 函数需要传参时加括号 第一个默认参数是event 如需传其他参数 用$event占位表示e解析：
         hanldeInfo2(num,e){
           console.log(num)
           console.log(e)

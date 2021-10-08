@@ -11,7 +11,7 @@
   <div id="root">
     <!-- 计算属性若页面中没有被使用 谷歌vue插件是不显示变化的 -->
     <h3>今天天气很</h3>
-    <!-- <h3>今天天气很{{info}}</h3> -->
+    <h3>今天天气很{{info}}</h3>
     <button @click="changeWeather">切换天气</button>
   </div>
 
@@ -48,7 +48,7 @@
             console.log( 'info计算属性也能被监视',newValue,oldValue );
           }
         }
-      },
+      }
     })
     // 监听的第二种写法 用vm身上的api:
     vm.$watch('is_hot',{
