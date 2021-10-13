@@ -23,7 +23,9 @@
       el:'#root',
       data
     })
-    console.log(vm)
+    console.log( Vue.set===vm.$set )
+    console.log(vm.__proto__)
+    console.log( Vue.prototype )
     console.log(vm._data,'vm._data')
     console.log(vm._data === data)
   </script>
