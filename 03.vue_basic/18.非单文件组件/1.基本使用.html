@@ -1,0 +1,121 @@
+<!-- 
+  非单文件组件：一个文件中包含n个组件
+  单文件组件：一个文件中只有1个组件（常用）
+ -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>基本使用</title>
+  <script src="../js/vue.js"></script>
+</head>
+<body>
+  <div id="root">
+    <!-- 第三步 编写使用组件标签 -->
+    <company></company>
+    <person></person>
+    <hr>
+    <person></person>
+    <hr>
+    <!-- 此时借助vue开发者工具更改组件的数据 发现相同的组件之间数据更改不会被影响(全局组件也是) -->
+    <hello></hello>
+  </div>
+  <hr>
+  <div id="root2">
+    <!-- 使用未注册的局部组件会报错 此时可以使用全局组件 -->
+    <!-- <person></person> -->
+    <hello></hello>
+  </div>
+  
+  <script type="text/javascript">
+    Vue.config.productionTip = false
+
+    // 第一步 创建组件(这里的data必须是函数而非对象 因为组件的共用性 每次调用函数都会返回新值 让使用相同组件时数据互不影响)
+    const company = Vue.extend({
+      template:`
+        <div>
+          <p>公司名称：{{companyName}}</p>
+          <p>公司地址：{{companyAddress}}</p>
+          <button @click="reminder">公司创立于</button>
+        </div>
+      `,
+      data(){
+        return {
+          companyName:'Alibaba',
+          companyAddress:'HangZhou'
+        }
+      },
+      methods: {
+        reminder(){
+          alert('1999年')
+        }
+      }
+    })
+
+    const person = Vue.extend({
+      template: `
+      <div>
+        <p>职员姓名：{{personName}}</p>
+        <p>职员年龄：{{personAge}}</p>
+      </div>
+    `, 
+      data() {
+        return {
+          personName: 'Mayun',
+          personAge: 58
+        }
+      }
+    })
+
+    const hello = Vue.extend({
+      template:`
+        <div style="backgroundColor:#a696bd;color:#fff">
+          <p>hello,{{name}}</p>
+        </div>
+      `,
+      data(){
+        return{
+          name:'屁兜(全局组件)'
+        }
+      }
+    })
+
+    /* 第二部 全局注册组件的方法,第一个参数是组件名，第二个参数是代码中对应的组件在哪变量名 */
+      Vue.component('hello', hello)
+
+    // 第二步 创建实例并注册组件（局部注册）
+    new Vue({
+      el:'#root',
+      components:{
+        company,
+        person
+      }
+    })
+    new Vue({
+      el:'#root2'
+    })
+  </script>
+</body>
+</html>
+
+<!-- 总结：
+  Vue使用组件的三大步骤
+  1.定义创建组件
+  2.注册组件（分局部/全局）
+  3.使用组件 即写组件标签
+
+  一、如何定义一个组件
+  使用Vue.extend(options)创建，其中options和new Vue(options)传入的options很像，但区别如下
+    1.el不需要写，为什么？--最终所有的组件都要经过一个vm的管理，由vm中的el决定服务于哪个容器
+    2.data必须写成函数，为什么？--避免组件在复用时，数据存在引用关系
+  备注：options中使用tempplate可以配置组件结构
+
+  二、如何注册组件
+    1.局部注册时用new Vue中传入components选项
+    2.全局注册时Vue.componet('组件名'，组件)
+
+  三、编写组件标签
+    <school></school>
+ -->
