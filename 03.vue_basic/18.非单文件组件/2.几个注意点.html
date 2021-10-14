@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>几个注意点</title>
+  <script src="../js/vue.js"></script>
+</head>
+<body>
+  <div id="root">
+    <!-- <School></School> -->
+    <!-- 组件大写为什么会报错？只有使用脚手架时Vue才能解析大写的书写方式 -->
+    <school></school>
+
+    <!-- 以下是简写形式 脚手架中可以使用 反之 页面无法识别多个 -->
+    <school/>
+    <school/>
+    <school/>
+  </div>
+
+  <script type="text/javascript">
+    Vue.config.productionTip = false
+
+    const school = Vue.extend({
+      name:'Collage', //name熟悉指定开发者工具中的组件名
+      template:`
+        <div>
+          <h3>Welcome to {{name}}</h3>
+          <h3>address:{{address}}</h3>
+        </div>
+      `,
+      data(){
+        return{
+          name:'Peking',
+          address:'Beijing'
+        }
+      }
+    })
+
+    new Vue({
+      el:'#root',
+      components:{
+        // School
+        school
+      }
+    })
+  </script>
+</body>
+</html>
+<!-- 
+  几个注意点总结：
+  1.关于组件名：
+    一个单词组成：{
+      写法一：首字母小写 school
+      写法二：首字母大写 School
+    }
+    多个单词组成：{
+      写法一：my-school
+      写法二：MySchool
+    }
+    备注：{
+      组件名避免HTML已有的标签元素名称 如h2
+      用name配置项指定组件在开发者工具中呈现的名字
+    }
+
+  2.关于组件标签
+    写法一：<school></school>
+    写法二：<School></School>
+
+    备注：不使用脚手架时，<school/>会导致后续组件不能渲染 => <shcool></shcool>就没事
+  
+  3.一个简写方式：
+    const school = Vue.extend（options）可简写为 const school = options 
+    虽然能简写 但建议在非单文件组件中不要使用 后期分析结构会混乱
+ -->
