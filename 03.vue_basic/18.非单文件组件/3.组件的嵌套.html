@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>组件的嵌套</title>
+  <script src="../js/vue.js"></script>
+</head>
+
+<body>
+  <div id="root"></div>
+
+  <script type="text/javascript">
+    Vue.config.productionTip = false
+
+    // 定义student组件
+    const student = Vue.extend({
+      template: `
+        <div>
+          <h5>my Name is {{name}}</h5>
+          <h5>age:{{age}}</h5>
+        </div>
+      `,
+      data() {
+        return {
+          name: '🍊',
+          age: '18'
+        }
+      }
+    })
+
+    // 定义school组件
+    const school = Vue.extend({
+      template: `
+        <div>
+          <h3>Welcome to {{name}}</h3>
+          <h3>address:{{address}}</h3>
+          <student></student>
+        </div>
+      `,
+      data() {
+        return {
+          name: 'Peking',
+          address: 'Beijing'
+        }
+      },
+      components:{
+        student
+      }
+    })
+
+    // 定义一个hello组件
+    const hello = Vue.extend({
+      template:`
+      <div>
+        <h3>Hello,{{msg}}<h3/>
+      </div>
+      `,
+      data(){
+        return{
+          msg:'🍇'
+        }
+      }
+    })
+ 
+    // 定义一个app组件（开发规范）位于vm之下 其他所有组件之上
+    const app = Vue.extend({
+      template:`
+      <div>
+        <school></school>
+        <hello></hello>
+      </div>
+      `,
+      components:{
+        school,
+        hello
+      }
+    })
+
+    // 创建vm
+    new Vue({
+      el: '#root',
+      template:`
+        <div>
+          <app></app>  
+        </div>
+      `,
+      components: {
+        app
+      }
+    })
+  </script>
+</body>
+
+</html>
