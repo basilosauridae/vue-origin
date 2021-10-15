@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>VueComponent</title>
+  <script src="../js/vue.js"></script>
+</head>
+<body>
+  <div id="root">
+    <grape></grape>
+    <orange></orange>
+  </div>
+
+  <script type="text/javascript">
+    Vue.config.productionTip = false
+
+    // 定义一个grape组件
+    const grape = Vue.extend({
+      template: `
+      <div>
+        <h3>grape,{{msg}}</h3>
+        <button @click="show">点我提示水果名</button>
+      </div>
+      `,
+      data() {
+        return {
+          msg: '🍇'
+        }
+      },
+      methods: {
+        show(){
+          alert(this.msg)
+          console.log(this,'组件配置函数中的this指向')//总结4(1)
+        }
+      },
+    })
+    // 定义一个orange组件
+    const orange = Vue.extend({
+      template:`
+      <div>
+        <h3>orange,{{msg}}</h3>
+      </div>
+      `,
+      data(){
+        return{
+          msg:'🍊'
+        }
+      }
+    })
+
+
+    console.log('@',grape)//打印出来是一个构造函数VueComponent，见最后总结1.
+    console.log('#',orange)
+    console.log(orange === grape) //false,证明总结3.
+
+    // 创建vm
+    const vm = new Vue({
+      el: '#root',
+      components: {
+        grape,
+        orange
+      } 
+    })
+
+    
+  </script>
+</body>
+</html>
+<!-- 
+  关于VueComponent:
+  1.school组件本质是一个名为VueComponent的构造函数，且不是程序员定义的，是调用了Vue.extend生成的
+
+  2.我们只需要写<school/>或<school></school>,Vue解析时会帮我们创建school组件的实例对象
+    即Vue帮我们执行的：new VueComponent(options)
+  
+  3.特别注意：每次调用Vue.extend,返回的都是一个个全新的VueComponent
+
+  4.关于this指向：
+    （1）创建组件的配置中：
+       data、methods、watch、computed中的函数 this均是【VueComponent实例对象】
+    （2）new Vue()配置中；
+       data、methods、watch、computed中的函数 this均指向【Vue实例对象】
+
+  5.VueComponent的实例对象，以后简称vc(也可称之为 组件实例对象)
+    Vue的实例对象，以后简称vm 
+
+    vm管理着很多个vc，即组件，可在控制台打印vm,中的$children有两个vueComponet,对应🍇和🍊组件
+ -->
