@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>一个重要的内置关系</title>
+  <script src="../js/vue.js"></script>
+</head>
+<body>
+  <div id="root">
+    <!-- 使用组件就相当于new VueComponent -->
+    <school></school>
+  </div>
+  <script type="text/javascript">
+    Vue.config.productionTip = false
+
+    function Demo(){
+      this.a = 1
+      this.b = 2
+    }
+    const d = new Demo()
+    console.log(Demo.prototype,'显式原型属性(只有函数才有)')
+    console.log(d.__proto__,'隐式原型属性')
+    console.log(Demo.prototype === d.__proto__,'两者都指向同一个原型对象')
+
+    // 通过显示原型属性操作原型对象，追加一个x属性，值为99
+    Demo.prototype.x = 99
+    console.log('@',d)
+
+    /* ----------------------------------------------------------------------------------------------- */
+    Vue.prototype.x = 99 //1.在Vue的原型对象里定义新属性x
+    // 定义一个school组件
+    const school = Vue.extend({
+      name:'school',
+      template:`
+        <div>
+          <h2>学校名称：{{name}}</h2>
+          <h2>学校地址：{{address}}</h2>
+          <button @click="showX">点我获取x</button>
+        </div>
+      `,
+      data(){
+        return{
+          name:'家里蹲',
+          address:'home'
+        }
+      },
+      methods: {
+        showX(){
+          alert(this.x) //2.在组件实例中也可以访问x,验证了最后的总结
+        }
+      },
+    })
+
+    // 创建一个vm
+    new Vue({
+      el:'#root',
+      data:{
+        msg:'你好'
+      },
+      components:{
+        school
+      }
+    })
+    console.log(school.prototype.__proto__ === Vue.prototype,'hh')
+  </script>
+</body>
+</html>
+<!-- 
+  1.一个重要的内置关系：VueComponent.prototype.__proto__ === Vue.prototype
+  （Vue让VueComponent的原型对象的__proto__指向Vue的原型对象）
+  2.为什么要有这个内置关系：让组件实例对象（vc）可以访问到Vue原型上的属性、方法
+ -->
