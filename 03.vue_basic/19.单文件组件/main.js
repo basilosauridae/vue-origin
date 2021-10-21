@@ -16,4 +16,10 @@ new Vue({
 
   2.因为vue.runtime.xxx.js没有模板解析器，所以不能使用template配置项，
     需使用render函数接收到的createElement函数去指定具体内容
+ */  
+
+/* 
+  vue.config.js配置文件
+  1.使用vue.inspect > output.js可以查看到vue脚手架的默认配置项
+  2.使用vue.config.js可对脚手架进行个性化定制 详见：https://cli.vuejs.org/zh/config/#vue-config-js
  */
