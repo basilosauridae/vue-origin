@@ -12,7 +12,7 @@
 
 ## mixin混入
   1.功能：多个组件 若配置相同 可以将配置提取 混入成一个对象
-  2.使用方式：
+  2.使用方式：  
     （1）在mixin.js中混合定义 export const a = {...}
     （2）使用混入 import引入
       全局混入 Vue.mixin(xxx)
@@ -22,3 +22,26 @@
     ·混合原组件中没有的 合并不覆盖
     ·混合原组件有的 以原组件中有的为主
     ·但是生命周期即使和原组件中相同 都会执行 且混合文件中的生命周期内容先执行
+
+## 插件
+  1.功能：用于增强Vue
+  2.本质：包含install方法的一个对象，install的第一个参数是Vue,第二个以后的参数是插件使用者传递的数据
+  3.定义插件：
+    在和main.js同级添加plugin.js中定义：
+
+    对象.install = function(Vue,option){
+      //添加全局过滤器
+      Vue.filter(...)
+
+      //添加全局指令
+      Vue.directive(...)
+
+      //配置全局混入（合）
+      Vue.mixin(...)
+
+      //添加实例方法
+      Vue.prototype.$myMethod = function(){...}
+      Vue.prototype.$myProperty = xxx
+    }
+  4.使用插件
+    在main.js中引入插件，并Vue.use(...)
