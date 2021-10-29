@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>sessionStorage</title>
+</head>
+
+<body>
+  <div>
+    <button onclick="saveData()">点我将数据保存到本地</button>
+    <button onclick="readData()">点我读取数据</button>
+    <button onclick="delData()">点我删除数据</button>
+    <button onclick="clearData()">点我清空数据</button>
+  </div>
+
+  <script type="text/javaScript">
+    let p = {
+      name:'Cetacea',
+      food:'🥪'
+    }
+    function saveData() {
+      // 存储到本地会直接调用toString方法，键值对都是字符串
+       sessionStorage.setItem('msg','hello')
+       sessionStorage.setItem('msg2',666)
+       
+      // 对象直接调用toString方法会变成[object,object],要使用JSON.stringify()方法转换
+       sessionStorage.setItem('person',p)
+       sessionStorage.setItem('right',JSON.stringify(p))
+    }
+
+    function readData() {
+      let result = sessionStorage.getItem('right')
+      console.log(JSON.parse(result))  
+      console.log(sessionStorage.getItem('g'))  //读取不存在的属性名 值为null
+    }
+
+    function delData() {
+       sessionStorage.removeItem('msg')
+    }
+
+    function clearData() {
+       sessionStorage.clear() //清空所有
+    }
+  </script>
+</body>
+
+</html>
