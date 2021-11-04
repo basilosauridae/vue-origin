@@ -79,3 +79,75 @@
    - 子组件 => 父组件 通信（要求父先给子一个函数 子去调用）
 3. v-model使用时，其绑定的值是不能通过props传递过来的，因为props不可直接被修改
 4. props传递过来的若是对象类型的值，修改对象中的属性时Vue不会报错，但不推荐这样做
+
+
+
+## WebStorage
+
+1. 存储内容大小一般在5M左右（不同浏览器容量不同）
+2. 浏览器通过Window.sessionStorage和Window.localStorage属性来实现本地存储机制
+3. 相关API:
+   1. xxxxStorage.setItem('key' , 'value')
+   2. xxxxStorage.getItem('key') 
+   3. xxxxStorage.removeItem('key') 
+   4. xxxxStorage.clear() 
+4. 备注
+   1. SessionStorage存储的内容会随着浏览器窗口关闭而消失
+   2. LocalStorage存储的内容，需要手动清除才消失
+   3. `xxxxStorage.getItem('key') `若对应的key值获取不到，返回值是null
+   4. JSON.parse(null)的结果仍然是null
+
+## 组件的自定义事件
+
+区别于JS中的内置事件，内置事件供html标签使用，自定义事件供组件使用
+
+1. 一种组件之间的通信方式  适用于`子传父`
+
+2. 使用场景：A是父组件，B是子组件，B想传递数据给A，就要在A中给B绑定自定义事件（事件的回调在A中）
+
+3. 使用方式 ... 
+
+   [link]: https://www.yuque.com/docs/share/3707bf1f-5227-43ab-8700-c4efd169992c?#《💌vue2.x
+
+
+
+## 全局事件总线
+
+1. 一种组件的通信方式 适用于`任意组件间通信`
+
+2. 安装全局事件总线
+
+   ```jsx
+   new Vue({
+     ...
+     beforeCreate(){
+     	Vue.prototype.$bus = this //安装全局事件总线，$bus就是当前应用的vue
+     ...
+   })
+   ```
+
+3. 使用事件总线
+
+   1. 接收数据的组件：A组件想接收数据，则在A组件中给$bus绑定自定义事件，事件的`回调留在A组件本身`
+   2. 提供数据的组件：`this.$bus.$emit('xxx' ，数据)`
+   3. 最好在beforeDestroy钩子中，用$off 解绑 **当前组件**所用到的事件
+
+   ```jsx
+   //数据接收的组件：
+   methods(){
+     ...
+     demo(data){...}
+     ...
+   }
+   mounted(){
+     this.$bus.$on('xxx',this.demo)
+   }
+   beforeDestroy(){
+    this.$bus.$off('xxx')
+   }
+   ```
+
+   ​
+
+
+
