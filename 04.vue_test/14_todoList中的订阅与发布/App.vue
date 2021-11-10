@@ -62,7 +62,9 @@ export default {
       this.todos.unshift(x)
     },
 
-    /* 勾选或取消勾选,爷传父，父再传子 */
+    /* 注意此时用pubsub 有两个参数 一个是函数名 一个是传递的参数 
+       当函数名msgName不使用时，可用下划线_代替
+     */
     checkTodo(_,id){
       this.todos.forEach(item => {
         if(item.id === id) item.done = !item.done
