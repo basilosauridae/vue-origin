@@ -1,3 +1,4 @@
+// vue中动画的使用
 <template>
   <div>
     <button @click="isShow = !isShow" >显示/隐藏</button>
@@ -23,6 +24,7 @@ export default {
     background-color: plum;
     width: 300px;
   }
+  /* 页面中有多个transition标签时，v改成transition表情的name的属性值 */
   .v-enter-active{
     animation: fly 0.5s;
   }
