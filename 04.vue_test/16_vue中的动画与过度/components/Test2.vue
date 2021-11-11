@@ -1,10 +1,10 @@
-// vue中过渡的使用
+// vue中过渡的使用,传统的过滤元素的样式要写全，动画不需要
 <template>
   <div>
     <button @click="isShow = !isShow" >显示/隐藏</button>
 
     <!-- 单个元素使用transition包裹 -->
-    <!--  <transition name="hello" appear>
+     <!-- <transition name="hello" appear>
       <h1 v-show="isShow">🎃😶🙄🥴🤨🎃</h1>
     </transition> -->
     
