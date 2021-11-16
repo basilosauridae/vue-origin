@@ -1,5 +1,8 @@
 import Vue from 'vue'
 import App from './App.vue'
+import ElementUI from 'element-ui'
+import 'element-ui/lib/theme-chalk/index.css'
+Vue.use(ElementUI)
 
 Vue.config.productionTip = false 
 
@@ -7,8 +10,5 @@ Vue.config.productionTip = false
 // 创建vm
 new Vue({
   render: h => h(App),
-  beforeCreate(){
-    Vue.prototype.$bus = this //安装全局事件总线（App和Item.vue）
-  }
 }).$mount('#app')
  

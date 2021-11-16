@@ -1,110 +1,58 @@
 <template>
   <div id="root">
-    <div class="todo-container">
-      <div class="todo-wrap">
-        <!-- <Top :recevice="recevice"></Top> -->
-        <Top @recevice="recevice"></Top>
-
-        <List 
-          :todos="todos" 
-        ></List>
-
-        <Bottom 
-          :todos="todos" 
-          @checkAllToDo="checkAllToDo"
-          @delAllDone = "delAllDone"
-        ></Bottom>
-      </div>
-    </div>
+    <time-line 
+      :activities="activities"
+      @handleButton="handleButton"
+    ></time-line>
   </div>
 </template>
 
 <script>
-import pubsub from 'pubsub-js'
-import Top from './components/Top.vue'
-import Bottom from './components/Bottom.vue'
-import List from './components/List.vue'
-
+import TimeLine from './components/TimeLine.vue'
 
 export default {
   name:'App',
   components:{
-    Top,
-    Bottom,
-    List
+    TimeLine
   },
-  data() {
+   data() {
     return {
-      // 由于todos是其他子组件都在使用的数据，所以放在App中（状态提升）
-      // todos:[]
-      todos:JSON.parse(localStorage.getItem('todos')) || [] //[]为防止无值为null,Footer.vue中的null.length报错
+      activities: [ 
+        {
+          content: '孙权 | 吴王',
+          timestamp: '团队名称 2018-04-12 20:46',
+          size: 'large',
+          type: 'info',
+          icon: 'el-icon-circle-plus-outline',
+          left:'填写表单',
+          btn:'待提交'
+        }, {
+          content: '曹丕 | 魏文帝',
+          timestamp: '团队名称 2018-04-03 20:46',
+          type:'danger',
+          size: 'large',
+          icon:'el-icon-circle-close',
+          left:'主管审批',
+          meun:'这边库存不足了',
+          btn:'驳回'
+        }, {
+          content: '孙全 | 吴王',
+          timestamp: '团队名称 2018-04-03 20:46',
+          size: 'large',
+          type:'success',
+          icon:'el-icon-circle-check',
+          left:'填写表单',
+          btn:'提交'
+        }
+      ]
     }
-  },
-  // 接收数据的组件在挂载的时候 绑定 全局事件总线
-  mounted() {
-    this.$bus.$on('updateTodo',this.updateTodo)
-
-    this.pubId = pubsub.subscribe('checkTodo',this.checkTodo)
-    this.pubId2 = pubsub.subscribe('delTodo',this.delTodo)
-  },
-  // 接收数据的组件在组件销毁之前要 解绑 全局事件总线
-  beforeDestroy() {
-    this.$bus.$off('updateTodo')
-
-    pubsub.unsubscribe(this.pubId)
-    pubsub.unsubscribe(this.pubId2)
   },
   methods: {
-    /* 添加一个todo */
-    recevice(x){
-      // console.log(x,'x')//函数也可以作为一个数据父传子
-      this.todos.unshift(x)
-    },
-
-    /* 勾选或取消勾选,爷传父，父再传子 */
-    checkTodo(_,id){
-      this.todos.forEach(item => {
-        if(item.id === id) item.done = !item.done
-      });
-    },
-
-    /* 删除 */
-    delTodo(_,id){
-      // filter方法不改变原数组 需要重新赋值 过滤不等于选中的id的组成新数组
-      this.todos = this.todos.filter(item => item.id !== id)
-    },
-
-    /* 全选or取消全选 */
-    checkAllToDo(done){
-      this.todos.forEach((item)=>{
-        item.done = done
-      })
-    },
-
-    /* 清除已完成 */
-    delAllDone(){
-      this.todos = this.todos.filter((item)=>{
-        return !item.done
-      })
-    },
-
-    /* 更新一个todo */
-    updateTodo(id,title){
-      this.todos.forEach((todo)=>{
-        if(todo.id === id) todo.title = title
-      })
+    /* 待提交、驳回、提交按钮操作 */
+    handleButton(x){
+      // 根据后台返回参数判断是哪个按钮,x是子组件告诉父组件点击的是哪个类型的按钮
+      console.log('操作函数在父组件中写',x)
     }
-  },
-  watch:{
-    /* todos(value){
-      localStorage.setItem('todos',JSON.stringify(value))
-    } */ //简写形式 无法监测数组中对象内部变化 需开启深度监听
-   todos:{
-      deep:true,
-      handler(value){
-        localStorage.setItem('todos',JSON.stringify(value))
-      }
-   }
   }
 }
 </script>
@@ -142,14 +90,5 @@ export default {
   }
   .btn:focus{
     outline: none;
-  }
-  .todo-container{
-    width: 600px;
-    margin:0 auto
-  }
-  .todo-container .todo-wrap{
-    padding: 10px;
-    border:1px solid #ddd;
-    border-radius: 5px;
   }
 </style>
