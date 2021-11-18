@@ -18,9 +18,10 @@ module.exports = {
      5.changeOrigin用于控制请求头中host的值 
 
      4和5不写，在vue项目中默认值为true,react项目中相反
+
     
   */
-  devServer: {
+ /*  devServer: {
     proxy: {
       // ’/api‘更为灵活 在需要走代理的请求地址 端口号后面添加次名称
       '/api': {
@@ -35,5 +36,5 @@ module.exports = {
         target: '<other_url>'
       }
     }
-  }
+  } */
 }
