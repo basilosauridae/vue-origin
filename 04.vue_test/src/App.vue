@@ -10,7 +10,10 @@ import Count from './components/Count'
 export default {
   components:{
     Count
-  }
+  },
+  mounted() {
+    console.log(this,'this')
+  },
 }
 </script>
 

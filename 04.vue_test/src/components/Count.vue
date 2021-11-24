@@ -16,7 +16,7 @@
 
 <script>
 export default {
-  name:'Count',
+  name:'Count', 
   data() {
     return {
       num:1,//用户选择的数字
