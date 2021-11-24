@@ -1,10 +1,10 @@
 <template>
   <div>
-    <h2>当前求和为{{sum}}</h2>
+    <h2>当前求和为{{$store.state.sum}}</h2>
     <select v-model.number="num">
       <!-- :value后是表达式是 会被解析成数字处理，如果不加:就变成字符串拼接了 |  方法二直接.number -->
       <option value="1">1</option>
-      <option value="2">2</option>
+      <option value="2">  2</option>
       <option value="3">3</option>
     </select>
     <button @click="increment">+</button>
@@ -20,25 +20,23 @@ export default {
   data() {
     return {
       num:1,//用户选择的数字
-      sum:0 //当前的和
     }
   },
   methods: {
     increment(){
-      this.sum += this.num
+      // actions中写的函数要用dispatch调用 但不涉及到逻辑和ajax可以直接用commit调用mutations
+      // this.$store.dispatch('add',this.num)
+      this.$store.commit('Add',this.num)
     },
     decrement(){
-      this.sum -= this.num
+      // this.$store.dispatch('minus',this.num)
+      this.$store.commit('Minus',this.num)
     },
     incrementOdd(){
-      if(this.sum % 2){
-        this.sum += this.num
-      }
+      this.$store.dispatch('odd',this.num)
     },
     incrementWait(){
-      setTimeout(()=>{
-        this.sum += this.num
-      }),500
+      this.$store.dispatch('wait',this.num)
     }
   },
 }
