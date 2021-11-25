@@ -1,6 +1,7 @@
 <template>
   <div>
-    <h2>当前求和为{{$store.state.sum}}</h2>
+    <h3>当前求和为{{$store.state.sum}}</h3>
+    <h2>当前求和放大10倍为：{{$store.getters.bigSum}}</h2>
     <select v-model.number="num">
       <!-- :value后是表达式是 会被解析成数字处理，如果不加:就变成字符串拼接了 |  方法二直接.number -->
       <option value="1">1</option>
@@ -19,7 +20,7 @@ export default {
   name:'Count', 
   data() {
     return {
-      num:1,//用户选择的数字
+      num:1,//用户选择的数字 
     }
   },
   methods: {
