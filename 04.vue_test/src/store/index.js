@@ -6,7 +6,9 @@ Vue.use(Vuex)
 
 // 准备state 用于存储数据
 const state = {
-  sum: 0 //当前的和
+  sum: 0, //当前的和
+  address:'KFC',
+  food:'鸡块'
 }
 
 // 准备mutations 用于操作state中的数据,不要写任何业务逻辑和ajax请求
