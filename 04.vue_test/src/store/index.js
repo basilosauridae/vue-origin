@@ -8,7 +8,10 @@ Vue.use(Vuex)
 const state = {
   sum: 0, //当前的和
   address:'KFC',
-  food:'鸡块'
+  food:'鸡块',
+  personList:[
+    {id:'001',name:'Jerry'}
+  ]
 }
 
 // 准备mutations 用于操作state中的数据,不要写任何业务逻辑和ajax请求
@@ -22,6 +25,9 @@ const mutations = {
   },
   Odd(state,value){
     console.log('Odd',state,value)
+  },
+  ADD_PERSON(state,value){
+    state.personList.unshift(value)
   }
 }
 
