@@ -1,7 +1,7 @@
 <template>
   <div>
-    <h3>当前求和为{{$store.state.sum}}</h3>
-    <h2>当前求和放大10倍为：{{bigSum}}</h2>
+    <h3>当前求和为{{sum}}</h3>
+    <!-- <h2>当前求和放大10倍为：{{bigSum}}</h2> -->
     <p>我在{{address}}吃{{food}}</p>
 
     <!-- 实现了组件间共享数据 -->
@@ -21,7 +21,7 @@
 </template>
  
 <script>
-import {mapActions, mapGetters, mapMutations, mapState} from 'vuex'
+import {mapActions, mapMutations, mapState} from 'vuex'
 export default {
   name:'Count', 
   data() {
@@ -38,11 +38,12 @@ export default {
       address:'address',
       food:'food'
     }) */
-    ...mapState(['address','food','personList']),
+    ...mapState('a',['address','food','sum']),
+    ...mapState('b',['personList'])
     /* ...mapGetters({
       bigSum:'bigSum'
     }) */
-    ...mapGetters(['bigSum']) //借助mapGetters生成计算属性，从getters中读取数据，简写（数组形式）
+    // ...mapGetters(['bigSum']) //借助mapGetters生成计算属性，从getters中读取数据，简写（数组形式）
   },
   methods: {
     // increment(){
@@ -55,8 +56,8 @@ export default {
     //   this.$store.commit('Minus',this.num)
     // },
     // 借助mapMutations生成对应的方法 方法会调用commit去联系mutations(html中的函数要加上括号传对应的参数)
-    ...mapMutations({increment:'Add',decrement:'Minus'}),//若想简写成数组 键值对数值要一致
-
+    ...mapMutations('a',{increment:'Add',decrement:'Minus'}),//若想简写成数组 键值对数值要一致
+ 
 
     /* ************************************************************************************** */
   /*   incrementOdd(){
@@ -65,7 +66,7 @@ export default {
     incrementWait(){
       this.$store.dispatch('wait',this.num)
     }, */
-    ...mapActions({incrementOdd:'odd',incrementWait:'wait'})
+    ...mapActions('a',{incrementOdd:'odd',incrementWait:'wait'})
 
   },
 }

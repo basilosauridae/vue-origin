@@ -4,68 +4,66 @@ import Vue from 'vue'
 import Vuex from 'vuex'
 Vue.use(Vuex)
 
-// 准备state 用于存储数据
-const state = {
-  sum: 0, //当前的和
-  address:'KFC',
-  food:'鸡块',
-  personList:[
-    {id:'001',name:'Jerry'}
-  ]
-}
-
-// 准备mutations 用于操作state中的数据,不要写任何业务逻辑和ajax请求
-const mutations = {
-  Add(state,value){
-    // console.log('mutations中被调用',state,value)
-    state.sum += value
+// 求和相关的配置
+const countOptions = {
+  namespaced:true,
+  state:{
+    sum: 0, //当前的和
+    address: 'KFC',
+    food: '鸡块',
   },
-  Minus(state,value){
-    state.sum -= value
+  mutations:{
+    Add(state, value) {
+      // console.log('mutations中被调用',state,value)
+      state.sum += value
+    },
+    Minus(state, value) {
+      state.sum -= value
+    },
   },
-  Odd(state,value){
-    console.log('Odd',state,value)
-  },
-  ADD_PERSON(state,value){
-    state.personList.unshift(value)
-  }
-}
-
-// 准备actions 用于响应组件中的动作
-const actions = {
-  /* 没什么逻辑的不需要在actions中再写一次 */
-  /*  add(context,value){
-    console.log('actions中被调用', context, value)
-    context.commit('Add',value)
-  }, */
-  /* minus(context,value){
-    context.commit('Minus',value)
-  }, */
-  odd(context,value){
-    // console.log('odd',context,value)
-    if(context.state.sum % 2){
-      context.commit('Add',value)
+  actions:{
+    odd(context, value) {
+      // console.log('odd',context,value)
+      if (context.state.sum % 2) {
+        context.commit('Add', value)
+      }
+    },
+    wait(context, value) {
+      setTimeout(() => {
+        context.commit('Add', value)
+      }, 5000)
     }
   },
-  wait(context,value){
-    setTimeout(()=>{
-      context.commit('Add',value)
-    },5000)
+  getters:{
+    bigSum(state) {
+      return state.sum * 10
+    }
   }
 }
 
-// 准备getters 用于计算state中的数据
-const getters = {
-  bigSum(state){
-    return state.sum*10
+// 人员管理相关的配置
+const personOptions = {
+  namespaced: true,
+  state:{
+    personList: [
+      { id: '001', name: 'Jerry' }
+    ]
+  },
+  mutations:{
+    ADD_PERSON(state, value) {
+      state.personList.unshift(value)
+    }
+  },
+  actions:{
+    
   }
 }
 
 
 // 创建并暴露导出store
 export default new Vuex.Store({
-  state,
-  mutations,
-  actions,
-  getters 
+  modules:{
+    a:countOptions,
+    b:personOptions
+  }
 })
