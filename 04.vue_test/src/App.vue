@@ -2,7 +2,7 @@
   <div class="container">
     <Count></Count>
     <hr>
-    <!-- <Person></Person> -->
+    <Person></Person>
 
     <hr>
     <p class="red">红色的数据表示上下组件之间的数据通过vuex实现了共享</p>

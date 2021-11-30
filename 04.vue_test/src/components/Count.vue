@@ -1,7 +1,7 @@
 <template>
   <div>
     <h3>当前求和为{{sum}}</h3>
-    <!-- <h2>当前求和放大10倍为：{{bigSum}}</h2> -->
+    <h2>当前求和放大10倍为：{{bigSum}}</h2>
     <p>我在{{address}}吃{{food}}</p>
 
     <!-- 实现了组件间共享数据 -->
@@ -21,7 +21,7 @@
 </template>
  
 <script>
-import {mapActions, mapMutations, mapState} from 'vuex'
+import {mapActions, mapMutations, mapState,mapGetters} from 'vuex'
 export default {
   name:'Count', 
   data() {
@@ -39,11 +39,11 @@ export default {
       food:'food'
     }) */
     ...mapState('a',['address','food','sum']),
-    ...mapState('b',['personList'])
+    ...mapState('b',['personList']),
     /* ...mapGetters({
       bigSum:'bigSum'
     }) */
-    // ...mapGetters(['bigSum']) //借助mapGetters生成计算属性，从getters中读取数据，简写（数组形式）
+    ...mapGetters('a',['bigSum']) //借助mapGetters生成计算属性，从getters中读取数据，简写（数组形式）
   },
   methods: {
     // increment(){
