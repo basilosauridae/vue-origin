@@ -1,33 +1,40 @@
 <template>
-  <div class="container">
-    <Count></Count>
-    <hr>
-    <Person></Person>
+  <div>
+    <div class="row">
+      <div class="col-xs-offset-2 col-xs-8">
+        <div class="page-header"><h2>Vue Router Demo</h2></div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-xs-2 col-xs-offset-2">
+        <div class="list-group">
+          <!-- 原始html中利用a标签实现页面的跳转 -->
+          <!-- <a class="list-group-item active" href="./about.html">About</a>
+          <a class="list-group-item" href="./home.html">Home</a> -->
 
-    <hr>
-    <p class="red">红色的数据表示上下组件之间的数据通过vuex实现了共享</p>
+          <!-- Vue中借助router-link标签实现路由的切换 -->
+          <router-link class="list-group-item" active-class="active" to="/about">About</router-link>
+          <router-link class="list-group-item" active-class="active" to="/home">Home</router-link>
+        </div>
+      </div>
+      <div class="col-xs-6">
+        <div class="panel">
+          <div class="panel-body">
+            <!-- 此处展示什么组件 看用户点击的是哪个(指定组件的呈现位置) -->
+            <router-view></router-view>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
 </template>
 
 <script>
-import Count from './components/Count'
-import Person from './components/Person.vue'
-
 export default {
-  components:{
-    Count,
-    Person
-  },
-  mounted() {
-    console.log(this,'this')
-  },
+
 }
 </script>
 
 <style>
-.red{
-  font-size: 12px;
-  color: #dd4f43;
-  font-weight: 700;
-}
+
 </style>
