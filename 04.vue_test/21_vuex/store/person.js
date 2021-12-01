@@ -22,6 +22,7 @@ export default {
         alert('添加的人必须姓王')
       }
     },
+   
     addPersonServer(context) {
       axios.get('https://api.uixsj.cn/hitokoto/get?type=social').then(
         response => {
