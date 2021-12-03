@@ -18,7 +18,7 @@
         } </router-link>  -->
 
 
-        <!-- <router-link :to="{
+        <router-link :to="{
           name:'xiangqing', //2.命名路由的使用
           query:{ 
             id:item.id,
@@ -26,7 +26,7 @@
           }
         }"> 
           {{item.msg}}
-        </router-link>-->
+        </router-link>
 
         <!-- 3.路由跳转携带params参数的字符串写法 -->
         <!-- <router-link :to="`/home/message/detail/${item.id}/${item.msg}`">
@@ -34,7 +34,7 @@
         </router-link>  -->
 
         <!-- 3.路由跳转携带params参数的对象写法 注意 里面是不能写path项的 -->
-        <router-link :to="{
+        <!-- <router-link :to="{
           name:'xiangqing',
           params:{
             id:item.id,
@@ -42,7 +42,7 @@
           }
         }">
           {{item.msg}}
-        </router-link>
+        </router-link> -->
       </li>
     </ul>
     <router-view></router-view>

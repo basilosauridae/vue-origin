@@ -33,7 +33,21 @@ export default new VueRouter({
             {
               name:'xiangqing', //命名路由 简化路由跳转的路径 用name代替path
               path:'detail/:id/:title',
-              component:Detail
+              component:Detail,
+
+              // 1.props的第一种写法，值为对象，该对象中的内容都会以props的形式传递给Detail组件
+              // props:{a:1,b:'hello'}
+
+              // 2.props的第二种写法，值为布尔值，会把该路由组件所收到的所有*params*参数，以props传给Detail组件
+              // props:true
+
+              // 3.props的第三种写法，值为函数
+              props($route){
+                return{
+                  id:$route.query.id,
+                  title:$route.query.title
+                }
+              }
             }
           ]
         }
