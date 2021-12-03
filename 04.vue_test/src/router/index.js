@@ -12,6 +12,7 @@ import Detail from '../pages/Detail'
 export default new VueRouter({
   routes:[
     {
+      name:'guanyu',
       path:'/about',
       component:About
     },
@@ -25,11 +26,15 @@ export default new VueRouter({
           path:'news', //此处一定不要写/news 底层已经处理好 子路由不要/
           component:News
         },
-        {
+        { 
           path:'message',
           component:Message,
           children:[
-            {path: 'detail',component: Detail}
+            {
+              name:'xiangqing', //命名路由 简化路由跳转的路径 用name代替path
+              path:'detail',
+              component:Detail
+            }
           ]
         }
       ]
