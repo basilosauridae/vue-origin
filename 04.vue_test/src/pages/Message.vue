@@ -2,14 +2,41 @@
   <div>
     <ul>
       <li v-for="item in list" :key="item.id">
-        <!-- 跳转路由并携带query参数的写法 to字符串的写法 -->
+        <!-- 1.跳转路由并携带query参数的写法 to字符串的写法 -->
         <!-- <router-link :to="`/home/message/detail?id=${item.id}&title=${item.msg}`">
           {{item.msg}}
         </router-link>  -->
-        <!-- 跳转路由并携带query参数的写法 to的对象写法 path:'/home/message/detail',-->
+
+  
+        <!-- 1.跳转路由并携带query参数的写法 to的对象写法 path:'/home/message/detail',
         <router-link :to="{
-          name:'xiangqing', //命名路由的使用
+          path:'/home/message/detail', 
           query:{ 
+            id:item.id,
+            title:item.msg
+          }
+        } </router-link>  -->
+
+
+        <!-- <router-link :to="{
+          name:'xiangqing', //2.命名路由的使用
+          query:{ 
+            id:item.id,
+            title:item.msg
+          }
+        }"> 
+          {{item.msg}}
+        </router-link>-->
+
+        <!-- 3.路由跳转携带params参数的字符串写法 -->
+        <!-- <router-link :to="`/home/message/detail/${item.id}/${item.msg}`">
+          {{item.msg}}
+        </router-link>  -->
+
+        <!-- 3.路由跳转携带params参数的对象写法 注意 里面是不能写path项的 -->
+        <router-link :to="{
+          name:'xiangqing',
+          params:{
             id:item.id,
             title:item.msg
           }
