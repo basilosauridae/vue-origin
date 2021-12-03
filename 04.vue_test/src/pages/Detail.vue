@@ -5,14 +5,18 @@
       <!-- <li>编号：{{$route.query.id}}</li>
       <li>内容：{{$route.query.title}}</li> -->
 
-      <li>编号：{{$route.params.id}}</li>
-      <li>编号：{{$route.params.title}}</li>
+      <!-- <li>编号：{{$route.params.id}}</li>
+      <li>编号：{{$route.params.title}}</li> -->
+      
+      <li>{{id}}</li>
+      <li>{{title}}</li>
     </ul>
   </div>
 </template>
 
 <script>
 export default {
+  props:['id','title'],
   data() {
     return {
       list:this.$route.query
