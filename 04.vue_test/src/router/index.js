@@ -32,7 +32,7 @@ export default new VueRouter({
           children:[
             {
               name:'xiangqing', //命名路由 简化路由跳转的路径 用name代替path
-              path:'detail',
+              path:'detail/:id/:title',
               component:Detail
             }
           ]
