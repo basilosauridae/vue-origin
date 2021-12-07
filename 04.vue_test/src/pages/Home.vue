@@ -4,7 +4,7 @@
     <div>
       <ul class="nav nav-tabs">
         <li>
-          <router-link to="/home/news" class="list-group-item" active-class="active">News</router-link>
+          <router-link to="/home/news" class="list-group-item" active-class="active" >News</router-link>
         </li>
         <li>
           <router-link to="/home/message" class="list-group-item" active-class="active">Message</router-link>

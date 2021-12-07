@@ -18,7 +18,7 @@
         } </router-link>  -->
 
 
-        <router-link :to="{
+        <!-- <router-link :to="{
           name:'xiangqing', //2.命名路由的使用
           query:{ 
             id:item.id,
@@ -26,8 +26,9 @@
           }
         }"> 
           {{item.msg}}
-        </router-link>
-
+        </router-link> -->
+        <button @click="pushShow(item)">push查看</button>
+        <button @click="replaceShow(item)">replace查看</button>
         <!-- 3.路由跳转携带params参数的字符串写法 -->
         <!-- <router-link :to="`/home/message/detail/${item.id}/${item.msg}`">
           {{item.msg}}
@@ -45,6 +46,7 @@
         </router-link> -->
       </li>
     </ul>
+    <hr>
     <router-view></router-view>
   </div>
 </template>
@@ -59,6 +61,27 @@ export default {
         {id:"002",msg:'message002'},
         {id:"003",msg:'message003'}
       ]
+    }
+  },
+  // 点击两个不同按钮 最后查看地址栏回退步骤比较push和replace的不同
+  methods: {
+    pushShow(item){
+      this.$router.push({
+        name:'xiangqing', //2.命名路由的使用
+        query:{ 
+          id:item.id,
+          title:item.msg
+        }
+      })
+    },
+    replaceShow(item){
+      this.$router.replace({
+        name:'xiangqing', 
+        query:{ 
+          id:item.id,
+          title:item.msg
+        }
+      })
     }
   },
 }

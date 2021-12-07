@@ -32,7 +32,8 @@ export default new VueRouter({
           children:[
             {
               name:'xiangqing', //命名路由 简化路由跳转的路径 用name代替path
-              path:'detail/:id/:title',
+              // path: 'detail/:id/:title',
+              path: 'detail',
               component:Detail,
 
               // 1.props的第一种写法，值为对象，该对象中的内容都会以props的形式传递给Detail组件
@@ -43,8 +44,9 @@ export default new VueRouter({
 
               // 3.props的第三种写法，值为函数
               props($route){
+                console.log($route,'$route')
                 return{
-                  id:$route.query.id,
+                  id: $route.query.id,
                   title:$route.query.title
                 }
               }
