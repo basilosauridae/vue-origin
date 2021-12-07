@@ -7,7 +7,6 @@ import Home from '../pages/Home'
 import News from '../pages/News'
 import Message from '../pages/Message'
 import Detail from '../pages/Detail'
-import Test from '../pages/Test'
 
 // 创建并暴露一个路由器
 export default new VueRouter({
@@ -26,10 +25,6 @@ export default new VueRouter({
         {
           path:'news', //此处一定不要写/news 底层已经处理好 子路由不要/
           component:News
-        },
-        {
-          path: 'test',
-          component: Test
         },
         { 
           path:'message',
