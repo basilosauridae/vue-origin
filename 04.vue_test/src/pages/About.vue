@@ -11,10 +11,10 @@ export default {
   name:'About',
   // 切换组件的时候组件默认被销毁
   beforeDestroy() {
-    console.log('About组件即将被摧毁')
+    // console.log('About组件即将被摧毁')
   },
   mounted() {
-    console.log('About组件挂载完毕了')
+    // console.log('About组件挂载完毕了') 
   },
 }
 </script>

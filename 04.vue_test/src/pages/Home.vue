@@ -9,9 +9,15 @@
         <li>
           <router-link to="/home/message" class="list-group-item" active-class="active">Message</router-link>
         </li>
+        <li>
+          <router-link to="/home/test" class="list-group-item" active-class="active">Test</router-link>
+        </li>
       </ul>
       
-      <router-view></router-view>
+      <!-- 缓存路由组件 保持活性,include属性指定保持缓存组件的名字,缓存多个:include="['News','Test']" -->
+      <keep-alive include="News">
+        <router-view></router-view>
+      </keep-alive>
     </div>
   </div>
 </template>
@@ -20,7 +26,7 @@
 export default {
   name:'Home',
   mounted() {
-    console.log('Home组件挂载完毕',this)
+    // console.log('Home组件挂载完毕',this)
   },
 }
 </script>

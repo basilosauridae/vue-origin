@@ -63,6 +63,9 @@ export default {
       ]
     }
   },
+  beforeDestroy() {
+    console.log('Message组件即将被销毁')
+  },
   // 点击两个不同按钮 最后查看地址栏回退步骤比较push和replace的不同
   methods: {
     pushShow(item){
