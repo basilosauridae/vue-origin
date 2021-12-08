@@ -8,8 +8,8 @@ import News from '../pages/News'
 import Message from '../pages/Message'
 import Detail from '../pages/Detail'
 
-// 创建并暴露一个路由器
-export default new VueRouter({
+// 创建并一个路由器
+const router = new VueRouter({
   routes:[
     {
       name:'guanyu',
@@ -19,7 +19,6 @@ export default new VueRouter({
     {
       path:'/home',
       component:Home,
-      redirect:'/home/news',
       // 通过children配置子级路由
       children:[ 
         {
@@ -57,3 +56,19 @@ export default new VueRouter({
     }
   ]
 })
+// 全局前置路由守卫(路由初始化和每一次切换之前调用)
+router.beforeEach((to,from,next)=>{
+  // console.log('路由前置守卫被调用了',to,from)
+  if(to.path==='/home/news' || to.path==='/home/message'){
+    if(localStorage.getItem('school') === 'hm'){
+      next()
+    }else{
+      alert('学校名不对 无权限查看')
+    }
+  }else{
+    next()
+  }
+})
+
+// 路由暴露
+export default router
