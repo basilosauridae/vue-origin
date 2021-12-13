@@ -15,7 +15,7 @@ const router = new VueRouter({
       name:'guanyu',
       path:'/about',
       component:About,
-      meta:{title:'关于'}
+      meta: { isAuth: true,title:'关于'}
     },
     {
       path:'/home',
@@ -27,8 +27,8 @@ const router = new VueRouter({
           path:'news', //此处一定不要写/news 底层已经处理好 子路由不要/
           component:News,
           meta: { isAuth: true,title:'新闻' },
-          /* 独守路由守卫 */
-          beforeEnter:(to,from,next)=>{
+          /* 3.独享路由守卫 */
+          /* beforeEnter:(to,from,next)=>{
             // console.log('路由独享守卫‘,to,from)
             if (to.meta.isAuth){
               if(localStorage.getItem('school')==='hm'){
@@ -39,7 +39,7 @@ const router = new VueRouter({
             }else{
               next()
             }
-          }
+          } */
         },
         { 
           path:'message',
@@ -75,7 +75,7 @@ const router = new VueRouter({
   ]
 })
 /* 1.全局前置路由守卫(路由初始化和每一次切换之前调用) */
-router.beforeEach((to,from,next)=>{
+/* router.beforeEach((to,from,next)=>{
   // console.log('路由前置守卫被调用了',to,from)
   // if (to.path === '/home/news' || to.path === '/home/message') {  //写法一 有点麻烦 
   if (to.meta.isAuth) { //2.写法二 判断是否需要鉴权 路由配置项中添加meta
@@ -89,13 +89,13 @@ router.beforeEach((to,from,next)=>{
     // document.title = to.meta.title || '狸猫系统'
     next()
   }
-})
+}) */
 
 /* 2.全局后置路由守卫(路由初始化调用和每一次切换之后调用) */
-router.afterEach((to,from)=>{
+/* router.afterEach((to,from)=>{
   console.log('路由后置守卫被调用了',to,from)
   document.title = to.meta.title || '狸猫系统' //如果写在前置 逻辑要写多次
-})
+}) */
 
 /*  路由暴露 */
 export default router
