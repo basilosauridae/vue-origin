@@ -1,0 +1,24 @@
+<div id="app">
+  <h1>{{msg}}</h1>
+  <h1>{{msg>18?'成年':'未成年'}}</h1>
+  <h1>{{msg.toUpperCase()}}</h1>
+</div>
+
+<script src="./vue.js"></script>
+<script>
+  const vm = new Vue({
+    el:'#app',
+    data:{
+      msg:'18'
+    }
+  })
+  console.log( vm.msg )//在data中声明的函数，会被添加到vm实例上，所以不是vm.data.msg
+</script>
+
+<!--
+  1.引入vue.js,全局就有Vue构造函数,从而创建vue实例
+  2.el是vue管理的视图范围，值为选择器
+  3.data是vue中可以使用的数据
+
+  4.小胡子语法支持三元运算符 但不支持if for
+-->

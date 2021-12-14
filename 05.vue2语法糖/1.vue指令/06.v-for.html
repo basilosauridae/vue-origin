@@ -1,0 +1,30 @@
+<div id="app">
+  <ul>
+    <li v-for="(item,index) in list" :key="index">{{item}}-{{index}}</li>
+  </ul>
+  <ul>
+    <li v-for="(value, prop) in obj">{{ value }}-{{prop}}</li>
+  </ul>
+</div>
+<script src="../vue.js"></script>
+<script>
+  const vm = new Vue({
+    el:'#app',
+    data:{
+      list:['百里守约','甄姬','孙膑','花木兰'],
+      obj: {
+        name: '百里守约',
+        age: 18,
+        family: '百里玄策',
+        skill: '刺客型射手'
+      }
+    }
+  })
+</script>
+<!-- 
+  v-for可以遍历数组和对象
+  数组中 item是每一项 index是下标
+  对象中 value是属性值 prop是属性名
+
+  :key="" 在遍历时 动态给虚拟dom添加标识 优化渲染性能 差异化更新
+ -->

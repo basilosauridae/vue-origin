@@ -1,0 +1,22 @@
+<div id="app">
+  <h1 v-show="flag">{{ msg }}</h1>
+  <h1 v-if="flag">{{ msg }}</h1>
+</div>
+
+<script src="../vue.js"></script>
+<script>
+  const vm = new Vue({
+    el: '#app',
+    data: {
+      msg: 'hello vue',
+      flag: false
+    }
+  })
+</script>
+<!-- 
+  v-show 为false 改变的是标签的样式 为display:none 不占位置隐藏
+  v-if 为false 直接整个结构从dom树中消失
+
+  切换频繁用v-show,渲染消耗低
+  v-if是惰性 不频繁切换用
+ -->

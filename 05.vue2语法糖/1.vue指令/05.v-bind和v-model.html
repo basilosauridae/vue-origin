@@ -1,0 +1,36 @@
+<div id="app">
+  <img :src="imgUrl" :title="title">
+
+  <hr>
+  <h1>{{msg}}</h1>
+  <input type="text" v-model="msg">
+
+  <hr>
+  <select v-model="food">
+    <option value="1">稻子🌾</option>
+    <option value="2">米饭🍚</option>
+    <option value="3">馒头🥯</option>
+  </select>
+</div>
+
+<script src="../vue.js"></script>
+<script>
+  const vm = new Vue({
+    el:'#app',
+    data:{
+      imgUrl:'https://ss3.bdstatic.com/70cFv8Sh_Q1YnxGkpoWK1HF6hhy/it/u=401961554,4230296543&fm=26&gp=0.jpg',
+      title:'cool',
+      msg:'致敬袁公',
+      food:'1'
+    }
+  })
+</script>
+<!-- 
+  1.v-bind:key = "value"是 :key="value"的展开,动态绑定值
+
+  2.v-bind是单向绑定
+    v-model是双向数据绑定，用于表单控件，会忽略表单元素的初始值 总将vue实例数据作为数据来源，需要在data中声明
+  
+  3. :model和v-model的区别
+     :model是v-bind:model的缩写,<child :model="msg"></child>这种只是将父组件的数据传递到了子组件，并没有实现子组件和父组件数据的双向绑定
+ -->

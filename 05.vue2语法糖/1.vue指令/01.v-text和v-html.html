@@ -1,0 +1,20 @@
+<div id="app">
+  <p>{{msg}}</p>
+  <p v-html="msg"></p>
+  <p v-text="msg"></p>
+</div>
+
+<script src="../vue.js"></script>
+<script>
+  const vm = new Vue({
+    el:'#app',
+    data:{
+      msg:'<a href="#">我是a标签</a>'
+    }
+  })
+</script>
+
+<!-- 
+  v-html解析标签
+  v-text转换成内容 可以被msg代替
+ -->

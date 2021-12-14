@@ -1,0 +1,32 @@
+<div id="app">
+  <input type="text" @keyup="fn" placeholder="@keyup"/>
+  <input type="text" @keyup.enter="fn2" placeholder="@keyup.enter">
+</div>
+<script src="../vue.js"></script>
+<script>
+  const vm = new Vue({
+    el:'#app',
+    methods:{
+      fn(e){
+        if(e.keyCode===13){
+          alert('按了回车')
+        }
+      },
+      fn2(e){
+        alert('不需要判断键盘码就能监听按了回车')
+      }
+    }
+  })
+</script>
+<!-- 
+  1.按键修饰符：
+  @keyup.enter 回车
+  @keyup.esc 返回
+  
+  2.还有其他的按键监听 @keyup.shift/up/down/left/right
+
+  3.element-ui中不能直接使用 因为底层封装了 要使用必须@keyup.native.enter...
+
+  4.@keyup.enter常用于回车登录，通常写在密码输入框中
+    通过window.addEventListener('keydown',fn),fn在mounted中使用，调用的是login函数
+ -->
