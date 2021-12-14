@@ -1,0 +1,25 @@
+<div id="app">
+  <a href="http://www.baidu.com" @click="fn">去百度</a>
+  <a href="http://www.baidu.com" @click="fn2($event,100)">去百度2</a>
+</div>
+<script src="../vue.js"></script>
+<script>
+  const vm = new Vue({
+    el:'#app',
+    methods:{
+      fn(e){
+        e.preventDefault() //组织默认行为跳转
+      },
+      fn2(e,num){
+        e.preventDefault()
+      }
+    }
+  })
+</script>
+<!-- 
+  vue 中获取事件对象:
+  
+  (1)函数没有传参，直接通过形参接收e
+  (2)函数传参了，必须在函数声明中用 $event代指事件对象e,methods中函数传参顺序一致
+
+ -->

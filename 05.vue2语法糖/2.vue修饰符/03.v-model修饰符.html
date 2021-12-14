@@ -1,0 +1,36 @@
+<div id="app">
+  <!-- v-model的修饰符lazy关联的数据会使输入框输入完成触发change事件的时候才改变 请求次数减少-->
+  <input type="text" v-model.lazy="msg" @input="fn" @change="fn2" placeholder=".lazy">
+  <p>{{msg}}</p>
+  <hr>
+
+  <!-- input输入框中即使输入数字 类型还是自负床；使用.number修饰符 让输入的数字类型显示为数字 -->
+  <input type="text" v-model.number='num' placeholder=".number">
+  输入的类型:{{typeof num}}
+
+  <hr>
+
+  <!-- .trim避免输入空格后算作长度 -->
+  <input type="text" v-model.trim='aa' placeholder=".trim">
+  输入的长度:{{aa.length}}
+</div>
+
+<script src="../vue.js"></script>
+<script>
+  const vm = new Vue({
+    el:'#app',
+    data:{
+      msg:"",
+      num:0,
+      aa:''
+    },
+    methods:{
+      fn:function(){
+        console.log( 'input事件' )
+      },
+      fn2:function() {
+          console.log( 'change事件' )
+      }
+    }
+  })
+</script>

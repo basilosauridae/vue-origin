@@ -1,0 +1,21 @@
+<div id="app">
+  <div v-show="show">内容</div>
+  <button v-on:click="show = !show">点击切换</button>
+  <button v-on:click="fn(1,2)">点击切换-函数传值</button>
+</div>
+<script src="../vue.js"></script>
+<script>
+  const vm = new Vue({
+    el:'#app',
+    data:{
+      show:true
+    },
+    methods:{
+      fn(a,b){
+        console.log( a,b );
+      }
+    }
+  })
+</script>
+
+<!-- v-on:click是@click的简写 给元素注册事件 -->

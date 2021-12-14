@@ -1,0 +1,31 @@
+<div id="app">
+  <p>{{msg | upper}}</p>
+  <p>{{msg2 | upper}}</p>
+</div>
+<script src="../vue.js"></script>
+<script>
+  Vue.filter('upper',function(value){
+    return value.toUpperCase()
+  })
+  const vm = new Vue({
+    el:'#app',
+    data:{
+      msg:'love',
+      msg2:'you'
+    }
+  })
+</script>
+
+<!-- 
+  1.vue提供了过滤器 格式x => 过滤器 =>格式y，提供字符串转换功能
+
+  2.过滤器本质函数，函数的返回值就是过滤器处理后的结果，函数的形参可以拿到处理的字符串
+
+  3.语法 
+    定义：Vue.filter(过滤器名字，处理字符串的函数)
+    使用：{{要过滤的字符串 | 过滤器}}
+  
+  4.拓展 
+    引入moment.js 进行日期 时间戳到具体日期的转换
+    局部和全局过滤器的使用
+ -->
